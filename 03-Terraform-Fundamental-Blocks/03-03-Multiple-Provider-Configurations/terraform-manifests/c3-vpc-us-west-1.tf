@@ -4,6 +4,7 @@ resource "aws_vpc" "vpc-us-west-1" {
   provider = aws.aws-west-1
   tags = {
     "Name" = "vpc-us-west-1"
+    "Owner" = "dwickizer"
   }
 }
 

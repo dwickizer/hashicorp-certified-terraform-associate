@@ -1,15 +1,15 @@
 # Terraform Block
 terraform {
-  required_version = "~> 0.14.3"
+  required_version = "~> 1.0.2"
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
+     aws = {
+      source = "hashicorp/aws"
+      version = "3.51.0"
     }
-    random = {
+   random = {
       source = "hashicorp/random"
-      version = "3.0.1"
-    }    
+      version = "3.1.0"
+    }
   }
 }
 
