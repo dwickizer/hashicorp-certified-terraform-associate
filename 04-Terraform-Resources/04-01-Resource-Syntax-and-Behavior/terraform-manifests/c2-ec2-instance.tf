@@ -2,13 +2,14 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 
 resource "aws_instance" "my-ec2-vm" {
-  ami               = "ami-047a51fa27710816e"
+  ami               = "ami-0645cf757ebd107e5"
   instance_type     = "t2.micro"
-  availability_zone = "us-east-1a"
-  #availability_zone = "us-east-1b"
+  # availability_zone = "us-gov-west-1b"
+  subnet_id = "subnet-0a4220540eb21458b"
+  
   tags = {
-    "Name" = "web"
-    #"tag1" = "Update-test-1"    
+    "Name" = "web"   
+    "Owner" = "dwickizer"
+    "tag1" = "Update-test-1" 
   }
 }
-
