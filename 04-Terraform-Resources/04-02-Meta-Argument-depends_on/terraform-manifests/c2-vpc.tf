@@ -4,6 +4,7 @@ resource "aws_vpc" "vpc-dev" {
   cidr_block = "10.0.0.0/16"
   tags = {
     "Name" = "vpc-dev"
+    "Owner" = "dwickizer"
   }
 }
 
@@ -11,18 +12,31 @@ resource "aws_vpc" "vpc-dev" {
 resource "aws_subnet" "vpc-dev-public-subnet-1" {
   vpc_id                  = aws_vpc.vpc-dev.id
   cidr_block              = "10.0.1.0/24"
-  availability_zone       = "us-east-1a"
+  availability_zone       = "us-gov-west-1a"
   map_public_ip_on_launch = true
+  tags = {
+    "Name" = "vpc-dev-public-subnet-1"
+    "Owner" = "dwickizer"
+  }
 }
 
 # Resource-3: Internet Gateway
 resource "aws_internet_gateway" "vpc-dev-igw" {
   vpc_id = aws_vpc.vpc-dev.id
+  tags = {
+    "Name" = "vpc-dev-igw"
+    "Owner" = "dwickizer"
+  } 
 }
 
 # Resource-4: Create Route Table
 resource "aws_route_table" "vpc-dev-public-route-table" {
   vpc_id = aws_vpc.vpc-dev.id
+  tags = {
+    "Name" = "vpc-dev-public-route-table"
+    "Owner" = "dwickizer"
+  } 
+
 }
 
 # Resource-5: Create Route in Route Table for Internet Access
@@ -43,13 +57,17 @@ resource "aws_security_group" "dev-vpc-sg" {
   name        = "dev-vpc-default-sg"
   description = "Dev VPC Default Security Group"
   vpc_id      = aws_vpc.vpc-dev.id
+  tags = {
+    "Name" = "dev-vpc-sg"
+    "Owner" = "dwickizer"
+  }
 
   ingress {
     description = "Allow Port 22"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.80.55.64/27"]
   }
 
   ingress {
@@ -57,7 +75,15 @@ resource "aws_security_group" "dev-vpc-sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["192.80.55.64/27"]
+  }
+
+  ingress {
+    description = "Allow ping"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["192.80.55.64/27"]
   }
 
   egress {
@@ -68,3 +94,4 @@ resource "aws_security_group" "dev-vpc-sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
