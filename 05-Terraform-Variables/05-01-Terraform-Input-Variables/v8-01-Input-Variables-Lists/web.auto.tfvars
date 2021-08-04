@@ -1,0 +1,1 @@
+ec2_instance_type = [ "t3.xlarge", "t4.large", "t4.xlarge" ]
