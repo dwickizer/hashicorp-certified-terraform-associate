@@ -199,7 +199,7 @@ terraform fmt
 # Review the terraform plan
 terraform plan 
 ```
-## Step-08: Implement complex type cosntructors like `list` and `maps`
+## Step-08: Implement complex type constraints like `list` and `maps`
 - **Reference Sub folder:** v8-Input-Variables-Lists-Maps
 - [Type Constraints](https://www.terraform.io/docs/language/expressions/types.html)
 ### Step-08-01: Implement Vairable Type as List
