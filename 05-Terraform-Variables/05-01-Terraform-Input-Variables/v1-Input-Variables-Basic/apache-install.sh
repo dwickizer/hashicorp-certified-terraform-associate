@@ -1,6 +1,7 @@
-#!/bin/bash
+#! /bin/bash
 sudo yum update -y
-sudo yum install httpd -y
+sudo yum install -y httpd
+sudo service httpd start  
 sudo systemctl enable httpd
-sudo systemctl start httpd
-echo "<html><body><div>Welcome to StackSimplify ! AWS Infra created using Terraform</div></body></html>" > /var/www/html/index.html
+sudo echo "<h1>Hostname: $HOSTNAME</h1>" > /var/www/html/index.html
+sudo echo "<h1>Welcome to C2DM created using Terraform in us-gov-west-1 Region</h1>" >> /var/www/html/index.html
