@@ -2,13 +2,13 @@
 variable "aws_region" {
   description = "Region in which AWS resources to be created"
   type        = string
-  default     = "us-east-1"
+  default     = "us-gov-west-1"
 }
 
 variable "ec2_ami_id" {
   description = "AMI ID"
   type        = string
-  default     = "ami-0915bcb5fa77e4892" # Amazon2 Linux AMI ID
+  default     = "ami-0645cf757ebd107e5" # Amazon2 Linux AMI ID
 }
 
 variable "ec2_instance_count" {
@@ -17,20 +17,12 @@ variable "ec2_instance_count" {
   default     = 2
 }
 
-/*
-variable "ec2_instance_type" {
-  description = "EC2 Instance Type"
-  type = list(string)
-  default = ["t3.micro", "t3.small", "t3.large"]
-}
-*/
-
-
 variable "ec2_instance_tags" {
   description = "EC2 Instance Tags"
   type = map(string)
   default = {
-    "Name" = "ec2-web"
+    "Name" = "webvars8"
+    "Owner" = "dwickizer"
     "Tier" = "Web"
   }
 }
