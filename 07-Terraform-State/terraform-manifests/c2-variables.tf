@@ -4,9 +4,3 @@ variable "aws_region" {
   type        = string
   default     = "us-gov-west-1"
 }
-
-variable "ec2_instance_type" {
-  description = "EC2 Instance Type"
-  type = string
-  default = "t3.micro"
-}

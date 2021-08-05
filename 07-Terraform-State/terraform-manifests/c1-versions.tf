@@ -7,14 +7,7 @@ terraform {
       version = "~> 3.0"
     }
   }
-
-  backend "s3" {
-    bucket = "terraform-backend-dw"
-    key = "dev/terraform.tfstate"
-    region = "us-gov-west-1"
-  }
 }
-
 
 # Provider Block
 provider "aws" {
