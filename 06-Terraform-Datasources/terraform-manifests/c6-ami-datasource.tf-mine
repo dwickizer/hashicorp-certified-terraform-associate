@@ -1,0 +1,8 @@
+data "aws_ami" "amzlinux" {
+    owners = [ "self" ]
+    most_recent = true
+    tags = {
+      "key" = "Owner"
+      "value" = "dwickizer"
+    }
+}
