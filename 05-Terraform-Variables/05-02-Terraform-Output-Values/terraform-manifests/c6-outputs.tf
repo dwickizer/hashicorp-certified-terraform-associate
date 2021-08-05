@@ -13,12 +13,15 @@ output "ec2_instance_privateip" {
 # Argument Reference: Security Groups associated to EC2 Instance
 output "ec2_security_groups" {
   description = "List Security Groups associated with EC2 Instance"
-  value = aws_instance.my-ec2-vm.security_groups
+  value = aws_instance.my-ec2-vm.vpc_security_group_ids
+  #value = aws_instance.my-ec2-vm.security_groups
 }
 
+# VPC must have enable_dns_hostnames = true
 # Attribute Reference - Create Public DNS URL with http:// appended
 output "ec2_publicdns" {
   description = "Public DNS URL of an EC2 Instance"
   value = "http://${aws_instance.my-ec2-vm.public_dns}"
-  #sensitive = true   #Uncomment it during step-04 execution
+  # The following will redact in output (but not from using terraform output)
+  sensitive = true   #Uncomment it during step-04 execution
 }
