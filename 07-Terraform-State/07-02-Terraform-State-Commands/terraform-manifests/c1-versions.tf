@@ -13,10 +13,9 @@ terraform {
     bucket = "terraform-backend-dw"
     key = "dev/terraform.tfstate"
     region = "us-gov-west-1"
+    # For State Locking
+    dynamodb_table = "terraform-dev-state-table"
   }
-
-  # For State Locking
-  dynamodb_table = "terraform-dev-state-table"
 }
 
 # Provider Block
