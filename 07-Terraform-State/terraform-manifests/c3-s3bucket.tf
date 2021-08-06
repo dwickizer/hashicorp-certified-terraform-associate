@@ -1,9 +1,8 @@
-# Resource Block: Create Random Pet Name 
 
-# Resource Block: Create AWS S3 Bucket
+
+# Resource Block: Create AWS S3 Bucket for Terraform Backend
 resource "aws_s3_bucket" "terraform-backend" {
   bucket = "terraform-backend-dw"
-  acl = "private"
   
   versioning {
     enabled = true
@@ -14,6 +13,8 @@ resource "aws_s3_bucket" "terraform-backend" {
   }
 }
 
+# Creating the first key lets terraform delete the bucket, even with 
+# later versions of that key
 resource "aws_s3_bucket_object" "dev-folder" {
   bucket = aws_s3_bucket.terraform-backend.id
   key = "dev/terraform.tfstate"
