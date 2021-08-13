@@ -1,6 +1,8 @@
 #! /bin/bash
 sudo yum update -y
 sudo yum install -y httpd
-sudo systemctl enable httpd
 sudo service httpd start  
-echo "<h1>Welcome to StackSimplify ! AWS Infra created using Terraform in us-east-1 Region</h1>" | sudo tee /var/www/html/index.html
+sudo systemctl enable httpd
+sudo echo "<h1>Hostname: $HOSTNAME</h1>" > /var/www/html/index.html
+REGION=`echo $HOSTNAME | cut -d. -f2`
+sudo echo "<h1>Welcome to C2DM created using Terraform in $REGION Region</h1>" >> /var/www/html/index.html
