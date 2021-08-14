@@ -1,16 +1,22 @@
 {
-  "Version": "2012-10-17",
-  "Statement": [
-      {
-          "Sid": "PublicReadGetObject",
-          "Effect": "Allow",
-          "Principal": "*",
-          "Action": [
-              "s3:GetObject"
-          ],
-          "Resource": [
-              "arn:aws:s3:::mybucket-1045/*"
-          ]
-      }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AnonymousReadOnlyFromMitreNetwork",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws-us-gov:s3:::c2dm-test/*",
+            "Condition": {
+                "IpAddress": {
+                    "aws:SourceIp": [
+                        "192.80.55.64/27",
+                        "192.160.51.64/27",
+                        "128.29.0.0/16",
+                        "129.83.0.0/16"
+                    ]
+                }
+            }
+        }
+    ]
 }
