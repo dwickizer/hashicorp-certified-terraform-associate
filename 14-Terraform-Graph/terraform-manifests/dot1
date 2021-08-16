@@ -3,26 +3,52 @@ digraph {
 	newrank = "true"
 	subgraph "root" {
 		"[root] aws_instance.my-ec2-vm (expand)" [label = "aws_instance.my-ec2-vm", shape = "box"]
-		"[root] aws_security_group.vpc-ssh (expand)" [label = "aws_security_group.vpc-ssh", shape = "box"]
-		"[root] aws_security_group.vpc-web (expand)" [label = "aws_security_group.vpc-web", shape = "box"]
+		"[root] aws_internet_gateway.vpc-tf-igw (expand)" [label = "aws_internet_gateway.vpc-tf-igw", shape = "box"]
+		"[root] aws_route.vpc-tf-public-route (expand)" [label = "aws_route.vpc-tf-public-route", shape = "box"]
+		"[root] aws_route_table.vpc-tf-public-route-table (expand)" [label = "aws_route_table.vpc-tf-public-route-table", shape = "box"]
+		"[root] aws_route_table_association.vpc-tf-public-route-table-association-1 (expand)" [label = "aws_route_table_association.vpc-tf-public-route-table-association-1", shape = "box"]
+		"[root] aws_route_table_association.vpc-tf-public-route-table-association-2 (expand)" [label = "aws_route_table_association.vpc-tf-public-route-table-association-2", shape = "box"]
+		"[root] aws_security_group.vpc-tf-ssh (expand)" [label = "aws_security_group.vpc-tf-ssh", shape = "box"]
+		"[root] aws_security_group.vpc-tf-web (expand)" [label = "aws_security_group.vpc-tf-web", shape = "box"]
+		"[root] aws_subnet.vpc-tf-public-subnet-1 (expand)" [label = "aws_subnet.vpc-tf-public-subnet-1", shape = "box"]
+		"[root] aws_subnet.vpc-tf-public-subnet-2 (expand)" [label = "aws_subnet.vpc-tf-public-subnet-2", shape = "box"]
+		"[root] aws_vpc.vpc-tf (expand)" [label = "aws_vpc.vpc-tf", shape = "box"]
 		"[root] data.aws_ami.amzlinux (expand)" [label = "data.aws_ami.amzlinux", shape = "box"]
 		"[root] output.ec2_instance_publicip" [label = "output.ec2_instance_publicip", shape = "note"]
 		"[root] output.ec2_publicdns" [label = "output.ec2_publicdns", shape = "note"]
 		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" [label = "provider[\"registry.terraform.io/hashicorp/aws\"]", shape = "diamond"]
 		"[root] var.aws_region" [label = "var.aws_region", shape = "note"]
-		"[root] var.instance_type" [label = "var.instance_type", shape = "note"]
-		"[root] aws_instance.my-ec2-vm (expand)" -> "[root] aws_security_group.vpc-ssh (expand)"
-		"[root] aws_instance.my-ec2-vm (expand)" -> "[root] aws_security_group.vpc-web (expand)"
+		"[root] var.ec2_instance_type" [label = "var.ec2_instance_type", shape = "note"]
+		"[root] aws_instance.my-ec2-vm (expand)" -> "[root] aws_security_group.vpc-tf-ssh (expand)"
+		"[root] aws_instance.my-ec2-vm (expand)" -> "[root] aws_security_group.vpc-tf-web (expand)"
+		"[root] aws_instance.my-ec2-vm (expand)" -> "[root] aws_subnet.vpc-tf-public-subnet-1 (expand)"
 		"[root] aws_instance.my-ec2-vm (expand)" -> "[root] data.aws_ami.amzlinux (expand)"
-		"[root] aws_instance.my-ec2-vm (expand)" -> "[root] var.instance_type"
-		"[root] aws_security_group.vpc-ssh (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
-		"[root] aws_security_group.vpc-web (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] aws_instance.my-ec2-vm (expand)" -> "[root] var.ec2_instance_type"
+		"[root] aws_internet_gateway.vpc-tf-igw (expand)" -> "[root] aws_vpc.vpc-tf (expand)"
+		"[root] aws_route.vpc-tf-public-route (expand)" -> "[root] aws_internet_gateway.vpc-tf-igw (expand)"
+		"[root] aws_route.vpc-tf-public-route (expand)" -> "[root] aws_route_table.vpc-tf-public-route-table (expand)"
+		"[root] aws_route_table.vpc-tf-public-route-table (expand)" -> "[root] aws_vpc.vpc-tf (expand)"
+		"[root] aws_route_table_association.vpc-tf-public-route-table-association-1 (expand)" -> "[root] aws_route_table.vpc-tf-public-route-table (expand)"
+		"[root] aws_route_table_association.vpc-tf-public-route-table-association-1 (expand)" -> "[root] aws_subnet.vpc-tf-public-subnet-1 (expand)"
+		"[root] aws_route_table_association.vpc-tf-public-route-table-association-2 (expand)" -> "[root] aws_route_table.vpc-tf-public-route-table (expand)"
+		"[root] aws_route_table_association.vpc-tf-public-route-table-association-2 (expand)" -> "[root] aws_subnet.vpc-tf-public-subnet-2 (expand)"
+		"[root] aws_security_group.vpc-tf-ssh (expand)" -> "[root] aws_vpc.vpc-tf (expand)"
+		"[root] aws_security_group.vpc-tf-web (expand)" -> "[root] aws_vpc.vpc-tf (expand)"
+		"[root] aws_subnet.vpc-tf-public-subnet-1 (expand)" -> "[root] aws_vpc.vpc-tf (expand)"
+		"[root] aws_subnet.vpc-tf-public-subnet-2 (expand)" -> "[root] aws_vpc.vpc-tf (expand)"
+		"[root] aws_vpc.vpc-tf (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
 		"[root] data.aws_ami.amzlinux (expand)" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"]"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route.vpc-tf-public-route (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route_table_association.vpc-tf-public-route-table-association-1 (expand)"
+		"[root] meta.count-boundary (EachMode fixup)" -> "[root] aws_route_table_association.vpc-tf-public-route-table-association-2 (expand)"
 		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.ec2_instance_publicip"
 		"[root] meta.count-boundary (EachMode fixup)" -> "[root] output.ec2_publicdns"
 		"[root] output.ec2_instance_publicip" -> "[root] aws_instance.my-ec2-vm (expand)"
 		"[root] output.ec2_publicdns" -> "[root] aws_instance.my-ec2-vm (expand)"
 		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_instance.my-ec2-vm (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route.vpc-tf-public-route (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.vpc-tf-public-route-table-association-1 (expand)"
+		"[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)" -> "[root] aws_route_table_association.vpc-tf-public-route-table-association-2 (expand)"
 		"[root] provider[\"registry.terraform.io/hashicorp/aws\"]" -> "[root] var.aws_region"
 		"[root] root" -> "[root] meta.count-boundary (EachMode fixup)"
 		"[root] root" -> "[root] provider[\"registry.terraform.io/hashicorp/aws\"] (close)"
