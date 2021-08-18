@@ -1,6 +1,7 @@
 # AWS ELB
+
 resource "aws_elb" "elb" {
-  name    = "my-elb"
+  name    = join("",["tf-elb-", "${terraform.workspace}"])
   listener {
     instance_port     = 80
     instance_protocol = "http"
@@ -25,7 +26,11 @@ resource "aws_elb" "elb" {
 
   # Dynamic Expressions
   count = (var.high_availability == true ? 1 : 0)
-  availability_zones = var.availability_zones
+  # availability_zones = var.availability_zones
+  subnets = local.subnet_ids
+  security_groups = [aws_security_group.vpc-tf-elb[count.index].id]
   tags = local.common_tags
 }
+
+
 
