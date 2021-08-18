@@ -4,9 +4,8 @@ locals {
 }
 
 # Create Security Group using Terraform Dynamic Block
-resource "aws_security_group" "sg-dynamic" {
-  name = "dynamic-block-demo"
-  description = "dynamic-block-demo"
+resource "aws_security_group" "s3-dynamic-sg" {
+   description = "dynamic-block-demo"
 
   dynamic "ingress" {
     for_each = local.ports 
@@ -15,8 +14,12 @@ resource "aws_security_group" "sg-dynamic" {
       from_port   = ingress.value
       to_port     = ingress.value
       protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["192.80.55.64/27"]
     }
   }
+  
+  tags = merge({"Name" = join("", 
+     [var.s3-name, "{terraform.workspace}"])},local.common_tags)
+
 }
 
